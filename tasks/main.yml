@@ -1,0 +1,13 @@
+---
+# tasks file for x11
+
+# Include OS-specific installation tasks.
+- import_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- import_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+# create .Xauthority file for root user to handle X11 forwarding.
+- name: be sure .Xauthority is exist
+  file: path=/root/.Xauthority state=touch

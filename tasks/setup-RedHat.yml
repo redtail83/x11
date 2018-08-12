@@ -1,0 +1,17 @@
+---
+# file: roles/x11/tasks/setup-RedHat.yml
+
+# be sure X Window System installed
+- name: be sure 'X Window System' group package is installed on RedHat family
+  package: name={{ item }} state=present
+  with_items:
+    - "@X Window System"
+    - xauth
+    - xorg-x11-apps
+
+# be sure Japanese fonts installed
+- name: be sure Japanese fonts installed
+  package: name={{ item }} state=present
+  with_items:
+    - ipa-gothic-fonts
+    - ipa-pgothic-fonts

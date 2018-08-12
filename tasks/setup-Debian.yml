@@ -1,0 +1,9 @@
+---
+# file: roles/x11/tasks/setup-Debian.yml
+
+# be sure X Window System installed
+- name: be sure X Window System packages are installed on Debian family
+  package: name={{ item }} state=present
+  with_items:
+    - xserver-xorg
+    - x11-apps
