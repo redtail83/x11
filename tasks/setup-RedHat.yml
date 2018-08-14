@@ -8,6 +8,8 @@
     - "@X Window System"
     - xauth
     - xorg-x11-apps
+    - mesa-libGLU
+    - mesa-libGLU-devel
 
 # be sure Japanese fonts installed
 - name: be sure Japanese fonts installed
@@ -15,3 +17,27 @@
   with_items:
     - ipa-gothic-fonts
     - ipa-pgothic-fonts
+
+# be sure X11Forwarding enabled
+- name: be sure X11Forwarding enabled
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^X11Forwarding"
+    insertafter: "^#X11Forwarding yes"
+    line: "X11Forwarding yes"
+
+# be sure X11DisplayOffset enabled
+- name: be sure X11DisplayOffset enabled
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^X11DisplayOffset"
+    insertafter: "^#X11DisplayOffset 10"
+    line: "X11DisplayOffset 10"
+
+# be sure X11UseLocalhost disabled
+- name: be sure X11UseLocalhost disabled
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^X11UseLocalhost"
+    insertafter: "^#X11UseLocalhost yes"
+    line: "X11UseLocalhost no"
